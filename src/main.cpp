@@ -1,6 +1,12 @@
 #include <Arduino.h>
 #include "BTFunctions.h"
 #include "piano16bit.h"
+#include "BluetoothA2DPCommon.h"
+#include <BluetoothSerial.h>
+
+esp_bd_addr_t *lPeer;
+esp_bd_addr_t tsco ={0xad,0x8f,0xe7,0xb7,0x60,0xc1};
+// ad:8f:e7:b7:60:c1
 
 void setup()
 {
@@ -32,20 +38,23 @@ void loop()
     break;
   }
   case 'd':
-  {
+
     a2dp_source.end(true);
     break;
 
   case 'l':
   {
-    a2dp_source.set_ssid_callback(isValid);
-    a2dp_source.set_local_name("ESP32 a2dp SOUrce");
-    a2dp_source.set_discoverability(ESP_BT_GENERAL_DISCOVERABLE);
-    a2dp_source.set_volume(60);
-    break;
+    BluetoothSerial SerialBT;
+    Serial.println("Starting discover...");
+    BTScanResults *pResults = SerialBT.discover(10000);
+    if (pResults)
+      pResults->dump(&Serial);
+    else
+      Serial.println("Error on BT Scan, no result!");
   }
   case 'L':
-    a2dp_source.set_ssid_callback(doNothing);
+    a2dp_source.set_ssid_callback(doNothing); // Remove SSID Callback
+    break;
 
   case 'k':
 
@@ -72,7 +81,7 @@ void loop()
     break;
 
   case 'o':
-  {
+
     a2dp_source.start("S530"); // TSCO-TH5365TWS
     a2dp_source.set_volume(30);
 
@@ -82,7 +91,6 @@ void loop()
     a2dp_source.set_volume(30);
 
     break;
-  }
   case 'i':
 
     a2dp_source.set_local_name("ESP32 a2dp SOUrce");
