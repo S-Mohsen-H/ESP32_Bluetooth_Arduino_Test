@@ -83,3 +83,7 @@ bool isValid(const char *SSID, esp_bd_addr_t address, int rssi)
   Serial.println(SSID);
   return false;
 }
+bool doNothing(const char *SSID, esp_bd_addr_t address, int rssi)
+{
+  return false;
+}
