@@ -28,6 +28,9 @@ void loop()
     a2dp_source.set_volume(60);
     break;
   }
+  case 'L':
+    a2dp_source.set_ssid_callback(doNothing);
+
   case 'k':
   {
     Serial.println(a2dp_source.get_connection_state());
@@ -66,6 +69,7 @@ void loop()
     a2dp_source.set_volume(v);
     break;
   }
+
   case '2':
     Heap_Information();
     break;
