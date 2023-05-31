@@ -3,8 +3,10 @@
 
 #include "Arduino.h"
 #include "BluetoothA2DPSource.h"
+#include "BluetoothA2DPCommon.h"
 #include "piano16bit.h"
 #include <math.h>
+
 
 #include "stdlib.h"
 
