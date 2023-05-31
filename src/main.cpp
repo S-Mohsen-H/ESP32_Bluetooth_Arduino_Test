@@ -55,7 +55,9 @@ void loop()
 
     a2dp_source.start("S530"); // TSCO-TH5365TWS
     break;
-
+  case 'p':
+    a2dp_source.start(""); // TSCO-TH5365TWS
+    break;
   case 'i':
 
     a2dp_source.set_local_name("ESP32 a2dp SOUrce");
