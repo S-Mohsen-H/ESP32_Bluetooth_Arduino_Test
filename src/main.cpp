@@ -5,7 +5,7 @@
 #include <BluetoothSerial.h>
 
 esp_bd_addr_t *lPeer;
-esp_bd_addr_t tsco ={0xad,0x8f,0xe7,0xb7,0x60,0xc1};
+esp_bd_addr_t tsco = {0xad, 0x8f, 0xe7, 0xb7, 0x60, 0xc1};
 // ad:8f:e7:b7:60:c1
 
 void setup()
@@ -32,6 +32,8 @@ void loop()
   case 'x':
   {
     lPeer = a2dp_source.get_last_peer_address();
+    memcpy(tsco, *lPeer, sizeof(*lPeer));
+
     const char *s = a2dp_source.to_str(*lPeer);
     // SS = s;
     Serial.println(s);
@@ -39,7 +41,7 @@ void loop()
   }
   case 'd':
 
-    a2dp_source.end(true);
+    a2dp_source.end(false);
     break;
 
   case 'l':
