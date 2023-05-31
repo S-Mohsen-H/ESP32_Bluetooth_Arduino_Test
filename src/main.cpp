@@ -62,8 +62,17 @@ void loop()
   }
   case 'v': /////           set volume
   {
-    uint8_t v = Serial.parseInt();
-    a2dp_source.set_volume(v);
+    int a = 1;
+    while (a)
+    {
+      if (Serial.available())
+      {
+
+        uint8_t v = Serial.parseInt();
+        a2dp_source.set_volume(v);
+        a = 0;
+      }
+    }
     break;
   }
   case '2':
