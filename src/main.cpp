@@ -5,6 +5,8 @@
 void setup()
 {
   Serial.begin(115200);
+  a2dp_source.set_local_name("ESP32 a2dp SOUrce");
+  a2dp_source.set_discoverability(ESP_BT_GENERAL_DISCOVERABLE);
 }
 
 void loop()
@@ -16,53 +18,51 @@ void loop()
   switch (fCommand[0])
   {
   case 'd':
-  {
+
     a2dp_source.end(true);
     break;
-  }
+
   case 'l':
-  {
-    a2dp_source.set_ssid_callback(isValid);
-    a2dp_source.set_local_name("ESP32 a2dp SOUrce");
-    a2dp_source.set_discoverability(ESP_BT_GENERAL_DISCOVERABLE);
-    a2dp_source.set_volume(60);
+
+    a2dp_source.set_ssid_callback(isValid); // Activate SSID Callback
     break;
-  }
+
   case 'L':
-    a2dp_source.set_ssid_callback(doNothing);
+    a2dp_source.set_ssid_callback(doNothing); // Remove SSID Callback
+    break;
 
   case 'k':
-  {
+
     Serial.println(a2dp_source.get_connection_state());
     break;
-  }
+
   case 'j':
-  {
+
     a2dp_source.write_data(data);
     break;
-  }
+
   case 'm':
-  {
+
     a2dp_source.start("TSCO-TH5365TWS"); // TSCO-TH5365TWS
     break;
-  }
+
   case 'n':
-  {
+
     a2dp_source.start("Bluetooth Music"); // TSCO-TH5365TWS
     break;
-  }
+
   case 'o':
-  {
+
     a2dp_source.start("S530"); // TSCO-TH5365TWS
     break;
-  }
+
   case 'i':
-  {
+
     a2dp_source.set_local_name("ESP32 a2dp SOUrce");
     a2dp_source.set_discoverability(ESP_BT_GENERAL_DISCOVERABLE);
     a2dp_source.set_volume(60);
     break;
-  }
+
   case 'v': /////           set volume
   {
     int a = 1;
