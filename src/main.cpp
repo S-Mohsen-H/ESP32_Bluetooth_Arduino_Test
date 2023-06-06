@@ -93,11 +93,6 @@ void loop()
     a2dp_source.set_volume(30);
 
     break;
-  case 'i':
-
-    a2dp_source.set_local_name("ESP32 a2dp SOUrce");
-    a2dp_source.set_discoverability(ESP_BT_GENERAL_DISCOVERABLE);
-    break;
 
   case 'v': /////           set volume
   {
