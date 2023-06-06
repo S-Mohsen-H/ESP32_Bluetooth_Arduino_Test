@@ -46,13 +46,7 @@ void loop()
 
   case 'l':
   {
-    BluetoothSerial SerialBT;
-    Serial.println("Starting discover...");
-    BTScanResults *pResults = SerialBT.discover(10000);
-    if (pResults)
-      pResults->dump(&Serial);
-    else
-      Serial.println("Error on BT Scan, no result!");
+    a2dp_source.set_ssid_callback(isValid); // Remove SSID Callback
   }
   case 'L':
     a2dp_source.set_ssid_callback(doNothing); // Remove SSID Callback
