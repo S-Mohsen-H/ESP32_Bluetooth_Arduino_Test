@@ -64,7 +64,35 @@ void loop()
   case '4':
     a2dp_source.write_data(data);
     break;
+  case '9':
+  {
+    uint8_t a[13];
+    uint8_t i = 0;
+    uint8_t f = 1;
+    esp_bd_addr_t mac = {0, 0, 0, 0, 0, 0};
 
+    while (f)
+    {
+      if (Serial.available())
+      {
+        a[i] = Serial.read();
+        if (i == 11)
+          f = 0;
+        i++;
+      }
+      else
+        continue;
+    }
+    mac[0] = toHex(a);
+    mac[1] = toHex(a + 2);
+    mac[2] = toHex(a + 4);
+    mac[3] = toHex(a + 6);
+    mac[4] = toHex(a + 8);
+    mac[5] = toHex(a + 10);
+    
+    a2dp_source.connect_to(mac);
+    break;
+  }
   case '3':
     Serial.println(a2dp_source.get_connection_state());
     break;

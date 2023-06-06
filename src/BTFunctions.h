@@ -21,5 +21,6 @@ extern bool isValid(const char *SSID, esp_bd_addr_t address, int rssi);
 extern bool doNothing(const char *SSID, esp_bd_addr_t address, int rssi);
 extern int32_t get_data_frames(Frame *frame, int32_t frame_count);
 extern void Heap_Information(void);
+extern uint16_t toHex(uint8_t * c);
 
 #endif

@@ -87,3 +87,29 @@ bool doNothing(const char *SSID, esp_bd_addr_t address, int rssi)
 {
   return false;
 }
+
+uint16_t toHex(uint8_t *c)
+{
+  bool err = 0;
+  uint8_t t[2];
+  uint16_t a = 0;
+
+  t[0] = *c;
+  t[1] = *(c + 1);
+  for (int i = 0; i < 2; i++)
+  {
+    if (t[i] >= '0' && t[i] <= '9')
+      t[i] -= '0';
+
+    else if (t[i] >= 'a' && t[i] <= 'f')
+      t[i] -= 'a';
+
+    else if (t[i] >= 'A' && t[i] <= 'F')
+      t[i] -= 'A';
+    else
+      return 0;
+  }
+
+  a = (t[0]) * 16 + t[1];
+  return a;
+}
